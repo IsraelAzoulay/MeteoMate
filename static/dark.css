@@ -1,0 +1,64 @@
+/* Dark mode styles for MeteoMate */
+
+/* Set background and text colors for the entire HTML and body in dark mode */
+body, html {
+    background-color: #3a3a3a;
+    color: #e2e2e2;
+}
+
+/* Ensure the weather title is visible in dark mode */
+#weather-title {
+    color: white !important;
+}
+
+/* Dark mode adjustments for the navigation bar */
+.navbar-dark {
+    background-color: #2a2a2a;
+}
+
+.navbar-dark .navbar-brand {
+    color: #fff;
+}
+
+/* Ensure titles and headers are visible in dark mode */
+h1, h2, h3, h4, h5, h6 {
+    color: #f2f2f2;
+}
+
+/* Adjustments for the main content title in dark mode */
+h2.mb-4 {
+    color: #f2f2f2;
+}
+
+/* Adjustments for tables in dark mode */
+.table {
+    background-color: #3a3a3a;
+    color: #fff;
+}
+
+/* Different shades for striped table rows */
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(80, 80, 80, 0.9);
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+    background-color: rgba(70, 70, 70, 0.9);
+}
+
+/* Set border colors for tables in dark mode */
+.table-bordered {
+    border-color: #484848;
+}
+
+.table-bordered th, .table-bordered td {
+    border-color: #484848;
+}
+
+.table thead th {
+    border-color: #484848;
+    color: #f2f2f2;
+}
+
+.table th, .table td {
+    color: white;
+}

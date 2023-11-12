@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weather-python-flask
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: weather-python-flask
+  template:
+    metadata:
+      labels:
+        app: weather-python-flask
+    spec:
+      containers:
+      - name: weather-python-flask
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+        - containerPort: {{ .Values.service.targetPort }}

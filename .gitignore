@@ -1,0 +1,46 @@
+# .gitignore file
+
+# Virtual environment
+.python_flask/
+
+# Log files
+.logs/
+*.log
+
+# pytest cache
+.pytest_cache/
+
+# Python cache directories
+**/__pycache__/
+
+# Python byte codes
+tests/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Environment configuration
+.env
+
+# Docker
+docker-compose.override.yml
+*.env
+
+# Terraform
+terraform/.terraform
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+.crash.log
+
+# IDE and text editor files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+.DS_Store__pycache__/
+.pytest_cache/
+.DS_Store/terraform/.terraform/modules/

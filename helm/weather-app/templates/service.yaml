@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: weather-python-flask
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 5000
+  selector:
+    app: weather-python-flask

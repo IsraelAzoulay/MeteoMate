@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags for a responsive web page -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page title -->
+    <title>MeteoMate</title>
+
+    <!-- Bootstrap CSS for styling and layout -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- Custom styles with cache prevention -->
+    <link id="theme-style" rel="stylesheet" href="{{ url_for('static', filename='default.css') }}?v=2">
+</head>
+
+<body class="bg-light">
+
+    <!-- Navigation bar with the application title and dark mode toggle button -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">MeteoMate</a>
+        <!-- Dark mode toggle button -->
+        <button id="darkModeToggle" onclick="toggleDarkMode()" class="btn btn-outline-light ml-auto">Dark Mode</button>
+    </nav>
+
+    <!-- Main content displaying weather data -->
+    <div class="container mt-5" id="main-content">
+        <h2 class="mb-4" id="weather-title">Current Weather Overview</h2>
+        <div class="table-responsive">
+            <!-- Table to display the weather data for different cities -->
+            <table class="table table-hover table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>City</th>
+                        <th>Temperature (°C)</th>
+                        <th>Min Temp (°C)</th>
+                        <th>Max Temp (°C)</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iterate over the data to display weather for each city -->
+                    {% for city_data in data %}
+                    <tr>
+                        <td>{{ city_data.city }}</td>
+                        <td>{{ city_data.temp }}°C</td>
+                        <td>{{ city_data.min_temp }}°C</td>
+                        <td>{{ city_data.max_temp }}°C</td>
+                        <td>{{ city_data.description }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Scripts for Bootstrap and the Popper.js library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom script for toggling dark mode -->
+    <script>
+        function toggleDarkMode() {
+            let table = document.querySelector(".table");
+            let title = document.getElementById("weather-title");
+            if (document.body.style.backgroundColor === "rgb(58, 58, 58)") {
+                // Light mode settings
+                document.body.style.backgroundColor = "#f2f2f2";
+                document.body.style.color = "#333";
+                if (table) {
+                    table.style.backgroundColor = "#f2f2f2";
+                    table.style.color = "#333";
+                }
+                if (title) {
+                    title.style.color = "black";
+                }
+            } else {
+                // Dark mode settings
+                document.body.style.backgroundColor = "#3a3a3a";
+                document.body.style.color = "#e2e2e2";
+                if (table) {
+                    table.style.backgroundColor = "#3a3a3a";
+                    table.style.color = "#fff";
+                }
+                if (title) {
+                    title.style.color = "black";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
