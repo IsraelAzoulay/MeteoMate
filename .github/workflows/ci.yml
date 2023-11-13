@@ -13,7 +13,7 @@
 
 name: CI
 
-on: [push] # Triggered on every push
+on: [push] # It's triggered on every push
 
 jobs:
   build:
