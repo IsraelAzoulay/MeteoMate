@@ -13,8 +13,7 @@
 
 name: CI
 
-# The pipeline is triggered on push.
-on: [push]
+on: [push] # Triggered on every push
 
 jobs:
   build:

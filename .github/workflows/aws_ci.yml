@@ -1,28 +1,72 @@
 name: AWS CI
 
-on:
-  push:
-    branches: [ main ]
+on: [push]  # Triggered on every push
 
 jobs:
   build-and-push:
+    # Use the latest version of the Ubuntu runner.
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      # Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      # Install Python dependencies
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-mock detect-secrets
+
+      # Scan the code for secrets
+      - name: Scan Code for Secrets
+        run: detect-secrets scan
+
+      # Run integration tests in a Docker container
+      - name: Run Integration Tests
+        run: |
+          docker run --name myapp-integration -e "ENVIRONMENT=TEST" -e "MONGODB_URI=${{ secrets.MONGODB_URI }}" -e "MONGODB_TESTS_URI=${{ secrets.MONGODB_TESTS_URI }}" -e "API_KEY=${{ secrets.API_KEY }}" israelazoulay/weather-python-flask:dev python -m unittest tests/integration_tests.py || true
+          docker logs myapp-integration || true
+
+      # Run unit tests in a Docker container
+      - name: Run Unit Tests
+        run: |
+          docker run --name myapp -e "ENVIRONMENT=TEST" -e "MONGODB_URI=${{ secrets.MONGODB_URI }}" -e "MONGODB_TESTS_URI=${{ secrets.MONGODB_TESTS_URI }}" -e "API_KEY=${{ secrets.API_KEY }}" israelazoulay/weather-python-flask:dev || true
+          docker logs myapp || true
+
+      # Set up Terraform
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      # Initialize Terraform
+      - name: Terraform Init
+        run: terraform init
+
+      # Apply Terraform configurations
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      # Login to Amazon ECR
       - name: Login to Amazon ECR
-        id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Build and push Docker image
-        id: build-push
+      # Build and push Docker image to ECR
+      - name: Build and push Docker image to ECR
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
-          tags: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/weather-python-flask:latest
+          tags: 864003978924.dkr.ecr.us-east-1.amazonaws.com/weather-app-repo:latest
 
+      # Set up Kubeconfig for EKS
       - name: Set up Kubeconfig
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -30,6 +74,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
+      # Deploy to EKS using Helm
       - name: Deploy to EKS with Helm
-        run: |
-          helm upgrade --install weather-app-release helm/weather-app/ --namespace default --create-namespace
+        run: helm upgrade --install weather-app-release helm/weather-app/ --namespace default --create-namespace

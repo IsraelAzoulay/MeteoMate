@@ -8,6 +8,7 @@ on:
 
 jobs:
   deploy:
+    # Use the latest version of the Ubuntu runner.
     runs-on: ubuntu-latest
 
     steps:

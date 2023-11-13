@@ -1,19 +1,18 @@
 name: AWS CD
 
 on:
-  workflow_dispatch: # Making the workflow to be triggered manually
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Deploy to EKS with Helm
-        run: |
-          helm upgrade --install weather-app-release helm/weather-app/ --namespace default --create-namespace
+    - name: Deploy to EKS with Helm
+      run: helm upgrade --install weather-app-release helm/weather-app/ --namespace default --create-namespace
