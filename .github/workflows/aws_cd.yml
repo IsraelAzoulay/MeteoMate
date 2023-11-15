@@ -20,6 +20,11 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_REGION }}
 
+    # Update kubeconfig for EKS
+    - name: Set up kubeconfig
+      run: |
+        aws eks update-kubeconfig --name microservices-cluster --region ${{ secrets.AWS_REGION }}
+
     - name: Login to Amazon ECR
       uses: aws-actions/amazon-ecr-login@v1
 
