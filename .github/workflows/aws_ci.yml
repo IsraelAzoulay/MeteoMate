@@ -88,11 +88,17 @@ jobs:
           TF_VAR_region: ${{ secrets.AWS_REGION }}
         working-directory: ./terraform
 
+      # Set up Kubeconfig for EKS
+      - name: Set up Kubeconfig
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
       # Login to Amazon ECR
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
-        with:
-          region: ${{ secrets.AWS_REGION }}
 
       # Build and push Docker image to ECR
       - name: Build and push Docker image to ECR
@@ -101,14 +107,6 @@ jobs:
           context: .
           push: true
           tags: 864003978924.dkr.ecr.us-east-1.amazonaws.com/weather-app-repo:latest
-
-      # Set up Kubeconfig for EKS
-      - name: Set up Kubeconfig
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
 
       # Deploy to EKS using Helm
       - name: Deploy to EKS with Helm
