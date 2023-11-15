@@ -1,7 +1,9 @@
 name: AWS CD
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - new-k8s-phase
 
 jobs:
   deploy:
