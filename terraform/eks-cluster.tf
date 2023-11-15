@@ -9,8 +9,8 @@ module "eks" {
   vpc_id = aws_vpc.eks_vpc.id
 
   cluster_endpoint_public_access = true  # Enable public access to the API server
-  cluster_endpoint_public_access_cidrs = ["0.0.0.0/0"]  # Temporarily allow all IPs
-  # cluster_endpoint_public_access_cidrs = ["147.235.200.225/32"]  # Restrict public access to my current IP address
+  cluster_endpoint_public_access_cidrs = ["147.235.200.225/32"]  # Restrict public access to my current IP address
+  # cluster_endpoint_public_access_cidrs = ["0.0.0.0/0"]  # Temporarily allow all IPs
 
   eks_managed_node_groups = {
     eks_nodes = {
@@ -18,7 +18,7 @@ module "eks" {
       max_capacity     = 3
       min_capacity     = 1
 
-      instance_type = "m5.large"
+      instance_type = "t3.micro"
       key_name      = var.key_name
 
       subnet_ids = [aws_subnet.eks_subnet_a.id, aws_subnet.eks_subnet_b.id]
