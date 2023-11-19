@@ -42,16 +42,19 @@ resource "aws_security_group_rule" "eks_security_group_all_egress" {
   security_group_id = aws_security_group.eks_security_group.id
 }
 
+/*
 resource "aws_security_group_rule" "eks_security_group_ssh_ingress" {
   type              = "ingress"
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]  # Allow from all IPv4 addresses
+  cidr_blocks       = ["147.235.203.221/32"]  # My specific IP address
+  # cidr_blocks       = ["0.0.0.0/0"]  # Allow from all IPv4 addresses
   ipv6_cidr_blocks  = ["::/0"]       # Allow from all IPv6 addresses
   security_group_id = aws_security_group.eks_security_group.id
   description       = "Temporary SSH access"
 }
+*/
 
 resource "aws_internet_gateway" "eks_igw" {
   vpc_id = aws_vpc.eks_vpc.id

@@ -9,6 +9,11 @@ data:
       username: EKS-ClusterManagementRole
       groups:
         - system:masters
+    - rolearn: arn:aws:iam::864003978924:role/eks_nodes-eks-node-group-20231116120103300500000008
+      username: system:node:{{EC2PrivateDNSName}}
+      groups:
+        - system:bootstrappers
+        - system:nodes
   mapUsers: |
     - userarn: arn:aws:iam::864003978924:user/terraform-user
       username: terraform-user
