@@ -1,9 +1,7 @@
 name: AWS CD
 
 on:
-  push:
-    branches:
-      - new-k8s-phase
+  push: # Triggered on any push request
 
 jobs:
   deploy:

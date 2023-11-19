@@ -1,6 +1,6 @@
 name: AWS CI
 
-on: [push]  # It's triggered on every push
+on: [push]  # Triggered on every push
 
 jobs:
   build-and-push:
