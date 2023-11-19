@@ -92,4 +92,4 @@ jobs:
 
       # Deploy to EKS using Helm
       - name: Deploy to EKS with Helm
-        run: helm upgrade --install weather-app-release helm/weather-app/ --namespace default --create-namespace
+        run: helm upgrade --install weather-app helm/weather-app/ --namespace default
