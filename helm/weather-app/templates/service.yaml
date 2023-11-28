@@ -2,10 +2,15 @@ apiVersion: v1
 kind: Service
 metadata:
   name: weather-python-flask
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:us-east-1:864003978924:certificate/5fc4d3df-c7e8-4017-b715-ac32bd9d447b"
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "http"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
 spec:
   type: LoadBalancer
   ports:
-  - port: 80
+  - name: https
+    port: 443
     targetPort: 5000
   selector:
     app: weather-python-flask
