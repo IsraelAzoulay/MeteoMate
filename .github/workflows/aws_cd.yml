@@ -1,7 +1,12 @@
 name: AWS CD
 
+# on:
+#  push: # Triggered on any push request
+
 on:
-  push: # Triggered on any push request
+  push:
+    branches:
+      - feature/https-setup
 
 jobs:
   deploy:
