@@ -4,9 +4,7 @@ name: AWS CD
 #  push: # Triggered on any push request
 
 on:
-  push:
-    branches:
-      - feature/https-setup
+  workflow_dispatch:
 
 jobs:
   deploy:
