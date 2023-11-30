@@ -1,4 +1,4 @@
-replicaCount: 3
+replicaCount: 1
 
 image:
   repository: 864003978924.dkr.ecr.us-east-1.amazonaws.com/weather-app-repo

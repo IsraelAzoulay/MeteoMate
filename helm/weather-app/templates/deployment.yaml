@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: weather-python-flask
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: weather-python-flask
@@ -13,29 +13,36 @@ spec:
         app: weather-python-flask
     spec:
       containers:
-      - name: weather-python-flask
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        ports:
-        - containerPort: {{ .Values.service.targetPort }}
-        env:
-        - name: ENVIRONMENT
-          value: "PRODUCTION"
-        - name: PORT
-          value: "{{ .Values.service.targetPort }}"
-        - name: API_KEY
-          valueFrom:
-            secretKeyRef:
-              name: api-key
-              key: API_KEY
-        - name: MONGODB_URI
-          valueFrom:
-            secretKeyRef:
-              name: mongodb-uri
-              key: MONGODB_URI
-        - name: MONGODB_TESTS_URI
-          valueFrom:
-            secretKeyRef:
-              name: mongodb-tests-uri
-              key: MONGODB_TESTS_URI
-        - name: FLASK_ENV
-          value: "production"
+        - name: weather-python-flask
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.service.targetPort }}
+          env:
+            - name: ENVIRONMENT
+              value: "PRODUCTION"
+            - name: PORT
+              value: "{{ .Values.service.targetPort }}"
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: api-key
+                  key: API_KEY
+            - name: MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-uri
+                  key: MONGODB_URI
+            - name: MONGODB_TESTS_URI
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-tests-uri
+                  key: MONGODB_TESTS_URI
+            - name: FLASK_ENV
+              value: "production"
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
