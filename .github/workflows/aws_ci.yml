@@ -1,6 +1,6 @@
 name: AWS CI
 
-on: [push]  # Triggered on every push
+on: [push]  # Triggered on any push
 # on:
 #  push:
 #    branches:
