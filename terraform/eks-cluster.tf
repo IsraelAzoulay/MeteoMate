@@ -18,7 +18,7 @@ module "eks" {
       max_capacity     = 2
       min_capacity     = 1
 
-      instance_type = "t3.small"
+      instance_type = "t3.micro"
       key_name      = var.key_name
 
       subnet_ids = [aws_subnet.eks_subnet_a.id, aws_subnet.eks_subnet_b.id]
