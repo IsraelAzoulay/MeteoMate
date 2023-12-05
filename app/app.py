@@ -32,10 +32,10 @@ app.config['PROPAGATE_EXCEPTIONS'] = True
 @app.before_request
 def before_request():
     # Redirect HTTP requests to HTTPS in production environment
-    if os.getenv('ENVIRONMENT') == 'PRODUCTION' and not request.is_secure:
-        url = request.url.replace('http://', 'https://', 1)
-        code = 301
-        return redirect(url, code=code)
+    # if os.getenv('ENVIRONMENT') == 'PRODUCTION' and not request.is_secure:
+        # url = request.url.replace('http://', 'https://', 1)
+        # code = 301
+        # return redirect(url, code=code)
 
     # Existing logging functionality
     logging.info(f"Before Request: {request.endpoint}")
