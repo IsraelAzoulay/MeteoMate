@@ -45,6 +45,10 @@ def after_request(response):
     logging.info(f"After Request: {request.endpoint} responded with {response.status}")
     return response
 
+@app.route('/health')
+def health():
+    return 'OK', 200
+
 def create_mongo_client():
     """
     Create and return a MongoDB client.
