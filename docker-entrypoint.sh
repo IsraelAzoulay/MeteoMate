@@ -17,7 +17,7 @@ if [ "$ENVIRONMENT" = 'TEST' ]; then
 elif [ "$ENVIRONMENT" = 'PRODUCTION' ]; then
   # Start the application using Gunicorn in production mode
   cd app
-  gunicorn -b :$PORT app:app
+  gunicorn -b :$PORT app:app --timeout 120 -w 4 # Set the timeout to 120 seconds and the number of workers to 4
 else
   # Start the Flask development server
   python app/app.py
