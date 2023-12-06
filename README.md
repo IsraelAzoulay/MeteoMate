@@ -72,7 +72,7 @@ MeteoMate uses multiple CI/CD pipelines for robust and automated deployment:
 - **Heroku Deployment**: Configured with GitHub Actions for CI/CD. On each push to the `main` branch, the app undergoes a build and test phase, and is manually deployed to Heroku using the `cd.yml` workflow.
   - Live on Heroku: https://meteomate-30b58b736361.herokuapp.com/
   
-- **AWS Deployment with Kubernetes**: Containerized and ready for deployment on AWS EKS. The `aws_ci.yml` and `aws_cd.yml` workflows in the `.github/workflows` directory handle the CI/CD for AWS deployments, including steps for building the Docker image, running tests, applying Terraform configurations, updating the Kubernetes configuration, and deploying the application using Helm.
+- **AWS Deployment with Kubernetes**: Containerized and deployed on AWS EKS. The `aws_ci.yml` and `aws_cd.yml` workflows in the `.github/workflows` directory handle the CI/CD pipelines for AWS deployments, including steps for building the Docker image, running tests, applying Terraform configurations, updating the Kubernetes configuration, and deploying the application using Helm.
   - Live on AWS EKS: https://www.meteomate.online/
 
 ### Infrastructure Management:
