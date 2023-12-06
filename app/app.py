@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 import certifi
 from functools import lru_cache
 
-# Load environment variables from the .env file
+# Loading environment variables from the .env file
 load_dotenv()
 
 # Configure logging settings
@@ -37,7 +37,7 @@ def before_request():
         # code = 301
         # return redirect(url, code=code)
 
-    # Existing logging functionality
+    # Logging functionality
     logging.info(f"Before Request: {request.endpoint}")
 
 @app.after_request

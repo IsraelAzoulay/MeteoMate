@@ -1,7 +1,7 @@
 name: AWS CD
 
 on:
-  workflow_dispatch:
+  push: # Triggered on any push request
 
 jobs:
   deploy:
