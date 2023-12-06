@@ -15,10 +15,10 @@ module "eks" {
   eks_managed_node_groups = {
     eks_nodes = {
       min_size     = 1
-      max_size     = 3
-      desired_size = 3
+      max_size     = 4
+      desired_size = 4
       
-      instance_types = ["t3.medium"]
+      instance_types = ["t3.micro"]
       key_name      = var.key_name
 
       subnet_ids = [aws_subnet.eks_subnet_a.id, aws_subnet.eks_subnet_b.id]

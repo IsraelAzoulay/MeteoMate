@@ -40,6 +40,16 @@ resource "aws_security_group" "eks_security_group" {
   }
 }
 
+resource "aws_security_group_rule" "eks_node_group_lb_ingress" {
+  type              = "ingress"
+  from_port         = 5000
+  to_port           = 5000
+  protocol          = "tcp"
+  source_security_group_id = "sg-043593bfc9b369acf"  # Load Balancer's Security Group ID
+  security_group_id = aws_security_group.eks_security_group.id
+  description       = "Allow traffic from LB to EKS nodes on port 5000"
+}
+
 resource "aws_security_group_rule" "eks_security_group_all_egress" {
   type              = "egress"
   from_port         = 0
