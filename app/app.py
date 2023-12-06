@@ -1,5 +1,5 @@
 # Importing necessary libraries and modules
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import requests
 import os
 import sys 
@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 import certifi
 from functools import lru_cache
 
-# Load environment variables from the .env file
+# Loading environment variables from the .env file
 load_dotenv()
 
 # Configure logging settings
@@ -31,12 +31,23 @@ app.config['PROPAGATE_EXCEPTIONS'] = True
 
 @app.before_request
 def before_request():
+    # Redirect HTTP requests to HTTPS in production environment
+    # if os.getenv('ENVIRONMENT') == 'PRODUCTION' and not request.is_secure:
+        # url = request.url.replace('http://', 'https://', 1)
+        # code = 301
+        # return redirect(url, code=code)
+
+    # Logging functionality
     logging.info(f"Before Request: {request.endpoint}")
 
 @app.after_request
 def after_request(response):
     logging.info(f"After Request: {request.endpoint} responded with {response.status}")
     return response
+
+@app.route('/health')
+def health():
+    return 'OK', 200
 
 def create_mongo_client():
     """

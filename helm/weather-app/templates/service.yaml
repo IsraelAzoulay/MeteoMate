@@ -1,11 +1,26 @@
+# Kubernetes Service Configuration for the webapp
 apiVersion: v1
 kind: Service
 metadata:
   name: weather-python-flask
+  annotations:
+    # Annotation to specify the ARN of the SSL certificate for secure HTTPS traffic
+    # This certificate is used by the AWS Load Balancer to enable SSL termination
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:us-east-1:864003978924:certificate/5fc4d3df-c7e8-4017-b715-ac32bd9d447b"
+    # Configuring the Load Balancer to use HTTP for communication with the service, meaning that the traffic from the
+    # Load Balancer to the pods is over HTTP.
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "http"
+    # Specifies the ports that will use SSL (HTTPS). In my case, HTTPS traffic on port 443 will be handled by the Load Balancer.
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
 spec:
+  # Exposing the service outside the cluster using a Load Balancer
   type: LoadBalancer
   ports:
-  - port: 80
+  - name: https
+    # The port on which the Load Balancer listens
+    port: 443
+    # The target port on the pods to which the Load Balancer sends requests
     targetPort: 5000
+  # Selector to target the pods created by the deployment
   selector:
     app: weather-python-flask

@@ -1,9 +1,11 @@
+# AWS IAM Authentication ConfigMap for EKS
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: aws-auth
   namespace: kube-system
 data:
+  # Mapping IAM roles to the Kubernetes groups - Cluster management role, and Node group role
   mapRoles: |
     - rolearn: arn:aws:iam::864003978924:role/EKS-ClusterManagementRole
       username: EKS-ClusterManagementRole
@@ -14,6 +16,7 @@ data:
       groups:
         - system:bootstrappers
         - system:nodes
+  # Mapping IAM users to the Kubernetes groups
   mapUsers: |
     - userarn: arn:aws:iam::864003978924:user/terraform-user
       username: terraform-user

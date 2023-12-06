@@ -1,13 +1,14 @@
-replicaCount: 3
+# Default values for the webapp Helm chart.
+replicaCount: 1 # Number of replicas for the deployment.
 
 image:
-  repository: 864003978924.dkr.ecr.us-east-1.amazonaws.com/weather-app-repo
-  pullPolicy: IfNotPresent
-  tag: "latest"
+  repository: 864003978924.dkr.ecr.us-east-1.amazonaws.com/weather-app-repo # Docker image repository.
+  pullPolicy: IfNotPresent # Image pull policy.
+  tag: "latest" # Docker image tag.
 
 service:
-  type: LoadBalancer
-  port: 80
-  targetPort: 5000
+  type: LoadBalancer # Type of service to expose.
+  port: 443 # Port for the LoadBalancer.
+  targetPort: 5000 # Target port on the pod.
 
 resources: {}
