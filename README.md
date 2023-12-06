@@ -8,7 +8,7 @@ MeteoMate is a sleek and simple web application that provides real-time weather 
 - **Responsive UI**: Designed to work seamlessly on both desktop and mobile devices.
 - **Logging**: Captures request information in MongoDB for analytics and monitoring purposes.
 - **Dockerized**: The application, along with it's unit and integration tests, is containerized using Docker, ensuring consistency across various environments and testing phases.
-- **Kubernetes Ready**: Deployable on Kubernetes clusters for scalable and resilient operations.
+- **Kubernetes orchestration**: Deployed on Kubernetes clusters for scalable and resilient operations.
 - **Infrastructure as Code**: Managed using Terraform and Helm for consistent and reproducible infrastructure provisioning.
 
 ## Prerequisites
@@ -72,12 +72,12 @@ MeteoMate uses multiple CI/CD pipelines for robust and automated deployment:
 - **Heroku Deployment**: Configured with GitHub Actions for CI/CD. On each push to the `main` branch, the app undergoes a build and test phase, and is manually deployed to Heroku using the `cd.yml` workflow.
   - Live on Heroku: https://meteomate-30b58b736361.herokuapp.com/
   
-- **AWS Deployment with Kubernetes**: Containerized and deployed on AWS EKS. The `aws_ci.yml` and `aws_cd.yml` workflows in the `.github/workflows` directory handle the CI/CD pipelines for AWS deployments, including steps for building the Docker image, running tests, applying Terraform configurations, updating the Kubernetes configuration, and deploying the application using Helm.
+- **AWS Deployment with K8S, Terraform and Helm**: Containerized and deployed on AWS EKS. The `aws_ci.yml` and `aws_cd.yml` workflows in the `.github/workflows` directory handle the CI/CD pipelines for AWS deployments, including steps for scanning secrets, running unit and integration tests, validating and applying Terraform configurations, updating the Kubernetes configuration, building & pushing the Docker image to AWS ECR, and deploying the application using Helm.
   - Live on AWS EKS: https://www.meteomate.online/
 
 ### Infrastructure Management:
 
-- **Terraform**: Used for provisioning and managing the AWS infrastructure, including EKS and EC2 instances.
+- **Terraform**: Used for provisioning and managing the AWS infrastructure, including EKS and EC2 instances & more.
 - **Helm**: Utilized for deploying and managing the Kubernetes application.
 - **AWS CloudWatch**: Integrated for monitoring and logging, providing insights into application performance and health.
 - **AWS ACM**: Used for managing SSL/TLS certificates for secure HTTPS connections.

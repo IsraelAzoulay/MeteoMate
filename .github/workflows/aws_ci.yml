@@ -1,10 +1,6 @@
 name: AWS CI
 
 on: [push]  # Triggered on any push
-# on:
-#  push:
-#    branches:
-#      - feature/https-setup
 
 jobs:
   build-and-push:
