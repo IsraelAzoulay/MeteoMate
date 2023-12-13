@@ -23,8 +23,8 @@ module "eks" {
     eks_nodes = {
       # Minimum, maximum, and desired number of worker nodes
       min_size     = 1
-      max_size     = 4
-      desired_size = 4
+      max_size     = 5
+      desired_size = 5
       
       # Instance types for the worker nodes
       instance_types = ["t2.micro"]
