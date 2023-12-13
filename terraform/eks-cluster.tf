@@ -27,7 +27,7 @@ module "eks" {
       desired_size = 4
       
       # Instance types for the worker nodes
-      instance_types = ["t3.micro"]
+      instance_types = ["t2.micro"]
       # SSH key name for accessing worker nodes
       key_name      = var.key_name
 
