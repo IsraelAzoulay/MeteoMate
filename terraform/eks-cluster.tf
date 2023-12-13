@@ -23,11 +23,11 @@ module "eks" {
     eks_nodes = {
       # Minimum, maximum, and desired number of worker nodes
       min_size     = 1
-      max_size     = 5
-      desired_size = 5
+      max_size     = 3
+      desired_size = 3
       
       # Instance types for the worker nodes
-      instance_types = ["t2.micro"]
+      instance_types = ["t3.micro"]
       # SSH key name for accessing worker nodes
       key_name      = var.key_name
 
