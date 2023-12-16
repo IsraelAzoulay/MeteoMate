@@ -22,12 +22,12 @@ module "eks" {
   eks_managed_node_groups = {
     eks_nodes = {
       # Minimum, maximum, and desired number of worker nodes
-      min_size     = 1
-      max_size     = 4
-      desired_size = 4
+      min_size     = 2
+      max_size     = 5
+      desired_size = 5
       
       # Instance types for the worker nodes
-      instance_types = ["t3.micro"]
+      instance_types = ["t2.micro"]
       # SSH key name for accessing worker nodes
       key_name      = var.key_name
 
