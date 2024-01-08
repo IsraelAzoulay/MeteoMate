@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: weather-python-flask
 spec:
-  replicas: 1 # Number of desired pods. This is typically scaled based on load
+  replicas: 2 # Number of desired pods. This is typically scaled based on load
   selector:
     matchLabels:
       app: weather-python-flask # This label matches the labels of the pods
