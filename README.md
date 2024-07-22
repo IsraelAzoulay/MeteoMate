@@ -92,5 +92,5 @@ MeteoMate uses multiple CI/CD pipelines for robust and automated deployment:
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-## License
+### License
 This project is licensed under the MIT License.
